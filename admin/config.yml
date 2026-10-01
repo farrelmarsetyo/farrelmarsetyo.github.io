@@ -92,3 +92,21 @@ collections:
       - { name: inline, label: Inline (short, no separate page), widget: boolean, default: true }
       - { name: related_posts, label: Show related posts, widget: boolean, default: false }
       - { name: body, label: Content, widget: markdown }
+
+  - name: settings
+    label: Settings
+    files:
+      - name: socials
+        label: Social links (icons under your bio)
+        file: _data/socials.yml
+        fields:
+          - { name: email, label: Email, widget: string, required: false }
+          - { name: cv_pdf, label: CV PDF link, widget: string, required: false }
+          - { name: scholar_userid, label: Google Scholar user ID, widget: string, required: false }
+          - { name: orcid_id, label: ORCID iD, widget: string, required: false }
+          - { name: research_gate_profile, label: ResearchGate profile name, widget: string, required: false }
+          - { name: github_username, label: GitHub username, widget: string, required: false }
+          - { name: linkedin_username, label: LinkedIn username, widget: string, required: false }
+          - { name: x_username, label: X (Twitter) username, widget: string, required: false }
+          - { name: instagram_id, label: Instagram username, widget: string, required: false }
+          - { name: rss_icon, label: Show RSS icon, widget: boolean, required: false }
