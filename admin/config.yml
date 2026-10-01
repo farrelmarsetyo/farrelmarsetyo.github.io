@@ -1,0 +1,94 @@
+# Sveltia CMS configuration (Decap CMS compatible). Editor lives at /admin/.
+backend:
+  name: github
+  repo: farrelmarsetyo/farrelmarsetyo.github.io
+  branch: main
+
+# Uploaded images land next to the existing site images.
+media_folder: assets/img
+public_folder: /assets/img
+
+collections:
+  - name: pages
+    label: Pages
+    files:
+      - name: about
+        label: About (home page)
+        file: _pages/about.md
+        fields:
+          - { name: layout, widget: hidden, default: about }
+          - { name: title, label: Title, widget: string }
+          - { name: permalink, widget: hidden, default: / }
+          - { name: subtitle, label: Subtitle (HTML allowed), widget: string, required: false }
+          - name: profile
+            label: Profile
+            widget: object
+            fields:
+              - { name: align, label: Picture alignment, widget: select, options: [left, right] }
+              - { name: image, label: Picture file name (inside assets/img), widget: string }
+              - { name: image_circular, label: Crop picture to a circle, widget: boolean, required: false }
+              - { name: more_info, label: Address block (HTML), widget: text, required: false }
+          - { name: selected_papers, label: Show selected papers, widget: boolean, required: false }
+          - { name: social, label: Show social icons, widget: boolean, required: false }
+          - name: announcements
+            label: News section
+            widget: object
+            fields:
+              - { name: enabled, label: Show news, widget: boolean, required: false }
+              - { name: scrollable, label: Scrollable, widget: boolean, required: false }
+              - { name: limit, label: Max items, widget: number, value_type: int, required: false }
+          - name: latest_posts
+            label: Latest posts section
+            widget: object
+            fields:
+              - { name: enabled, label: Show latest posts, widget: boolean, required: false }
+              - { name: scrollable, label: Scrollable, widget: boolean, required: false }
+              - { name: limit, label: Max items, widget: number, value_type: int, required: false }
+          - { name: body, label: Bio, widget: markdown }
+
+  - name: posts
+    label: Blog posts
+    label_singular: Blog post
+    folder: _posts
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { name: layout, widget: hidden, default: post }
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD HH:mm:ss" }
+      - { name: description, label: Description, widget: string, required: false }
+      - { name: tags, label: Tags (space separated), widget: string, required: false }
+      - { name: categories, label: Categories (space separated), widget: string, required: false }
+      - { name: body, label: Content, widget: markdown }
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: _projects
+    create: true
+    slug: "{{slug}}"
+    public_folder: assets/img
+    fields:
+      - { name: layout, widget: hidden, default: page }
+      - { name: title, label: Title, widget: string }
+      - { name: description, label: Description, widget: string, required: false }
+      - { name: img, label: Card image, widget: image, required: false }
+      - { name: importance, label: Order (1 = first), widget: number, value_type: int, required: false }
+      - { name: category, label: Category, widget: select, options: [work, fun] }
+      - { name: related_publications, label: Show related publications, widget: boolean, required: false }
+      - { name: body, label: Content, widget: markdown }
+
+  - name: news
+    label: News
+    label_singular: News item
+    folder: _news
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    identifier_field: date
+    fields:
+      - { name: layout, widget: hidden, default: post }
+      - { name: title, label: Title (only for non-inline items), widget: string, required: false }
+      - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD HH:mm:ssZZ" }
+      - { name: inline, label: Inline (short, no separate page), widget: boolean, default: true }
+      - { name: related_posts, label: Show related posts, widget: boolean, default: false }
+      - { name: body, label: Content, widget: markdown }
