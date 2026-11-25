@@ -9,3 +9,9 @@ h1 {
   color: black;
   text-align: center
 }
+
+.center-img {
+  display: block;
+  margin: 0 auto;      /* 0 top/bottom, auto left/right */
+  max-width: 100%;
+}
